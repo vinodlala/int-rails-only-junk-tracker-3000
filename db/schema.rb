@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_24_231731) do
+ActiveRecord::Schema.define(version: 2021_10_24_232315) do
 
   create_table "coupes", force: :cascade do |t|
+    t.integer "doors"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "mini_vans", force: :cascade do |t|
     t.integer "doors"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
