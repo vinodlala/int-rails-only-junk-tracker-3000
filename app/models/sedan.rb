@@ -1,0 +1,2 @@
+class Sedan < ApplicationRecord
+end
