@@ -21,16 +21,20 @@
   <%= form.text_field :wheels %>
 
   <%= form.label :engine_status %>
-  <%= form.select(:engine_status, @statuses) %>
+  <%= form.select(:engine_status, @statuses, selected: @vehicle.engine_status) %>
 
   <%= form.label :vehicle_type %>
-  <%= form.select(:vehicle_type, @vehicle_types) %>
+  <%= form.select(:vehicle_type, @vehicle_types, selected: @vehicle.vehicle_type.class.to_s) %>
 
   <%= form.label :doors %>
-  <%= form.text_field :doors %>
+  <%= form.text_field :vehicle_type_doors %>
 
   <%= form.label :seat_status %>
-  <%= form.select(:seat_status, @statuses) %>
+  <% if @vehicle.vehicle_type.respond_to?(:seat_status) %>
+    <%= form.select(:seat_status, @statuses, selected: @vehicle.vehicle_type.seat_status) %>
+  <% else  %>
+    <%= form.select(:seat_status, @statuses) %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

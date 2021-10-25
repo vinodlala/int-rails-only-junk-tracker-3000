@@ -19,7 +19,6 @@ class VehiclesController < ApplicationController
 
   # GET /vehicles/1/edit
   def edit
-    @vehicle_type = @vehicle.vehicle_type
   end
 
   # POST /vehicles or /vehicles.json
@@ -78,6 +77,7 @@ class VehiclesController < ApplicationController
 
   def set_statuses
     @statuses = [
+      [ "", "" ],
       [ "Works", "works" ],
       [ "Fixable", "fixable" ],
       [ "Junk", "junk"],
@@ -86,22 +86,22 @@ class VehiclesController < ApplicationController
 
   def set_vehicle_types
     @vehicle_types = [
-      [ "Coupe", "coupe" ],
-      [ "Sedan", "sedan" ],
-      [ "Mini-van", "mini_van" ],
-      [ "Motorcycle", "motorcycle" ],
+      [ "Coupe", "Coupe" ],
+      [ "Sedan", "Sedan" ],
+      [ "MiniVan", "MiniVan" ],
+      [ "Motorcycle", "Motorcycle" ],
     ]
   end
 
   def vehicle_type(vehicle_type)
     case vehicle_type["vehicle_type"]
-    when 'coupe'
+    when 'Coupe'
       Coupe.new(params.require(:vehicle).permit(:doors))
-    when 'sedan'
+    when 'Sedan'
       Sedan.new(params.require(:vehicle).permit(:doors))
-    when 'mini_van'
+    when 'MiniVan'
       MiniVan.new(params.require(:vehicle).permit(:doors))
-    when 'motorcycle'
+    when 'Motorcycle'
       Motorcycle.new(params.require(:vehicle).permit(:seat_status))
     end
   end

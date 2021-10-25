@@ -35,5 +35,19 @@
   <%= @vehicle.registration_id %>
 </p>
 
+<% if @vehicle.vehicle_type.respond_to?(:doors) %>
+  <p>
+    <strong>Doors:</strong>
+    <%= @vehicle.vehicle_type.doors %>
+  </p>
+<% end %>
+
+<% if @vehicle.vehicle_type.respond_to?(:seat_status) %>
+  <p>
+    <strong>Seat Status:</strong>
+    <%= @vehicle.vehicle_type.seat_status %>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
 <%= link_to 'Back', vehicles_path %>

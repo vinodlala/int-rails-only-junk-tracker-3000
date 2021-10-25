@@ -17,6 +17,7 @@
     <% @vehicles.each do |vehicle| %>
       <tr>
         <td><%= vehicle.vehicle_type.class %></td>
+        <td><%= vehicle.nickname %></td>
         <td><%= vehicle.mileage_rating %></td>
         <td><%= vehicle.registration_id %></td>
         <td><%= link_to 'Show', vehicle %></td>

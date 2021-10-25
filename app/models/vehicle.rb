@@ -3,6 +3,13 @@ class Vehicle < ApplicationRecord
 
   validates :mileage, presence: true
 
+  validates :wheels, inclusion: { in: [ 0, 1, 2, 3, 4 ] }, allow_nil: true
+  validates :wheels, inclusion: { in: [ 0, 1, 2 ] }, allow_nil: true, if: :motorcycle?
+
+  def motorcycle?
+    vehicle_type.class == Motorcycle
+  end
+
   def mileage_rating
     return if mileage.blank?
     return "low" if mileage < 10_000
