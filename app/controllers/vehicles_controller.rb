@@ -1,5 +1,6 @@
 class VehiclesController < ApplicationController
   before_action :set_vehicle, only: %i[ show edit update destroy ]
+  before_action :set_statuses, only: %i[ show new edit create update ]
 
   # GET /vehicles or /vehicles.json
   def index
@@ -22,6 +23,8 @@ class VehiclesController < ApplicationController
   # POST /vehicles or /vehicles.json
   def create
     @vehicle = Vehicle.new(vehicle_params)
+
+    @vehicle.registration_id = VehicleRegistrationService.register_vehicle @vehicle
 
     respond_to do |format|
       if @vehicle.save
@@ -64,6 +67,14 @@ class VehiclesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vehicle_params
-      params.require(:vehicle).permit(:nickname)
+      params.require(:vehicle).permit(:nickname, :mileage, :wheels, :engine_status)
     end
+
+  def set_statuses
+    @statuses = [
+      [ "Works", "works" ],
+      [ "Fixable", "fixable" ],
+      [ "Junk", "junk"],
+    ]
+  end
 end

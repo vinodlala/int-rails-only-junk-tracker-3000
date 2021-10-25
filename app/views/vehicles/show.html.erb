@@ -5,5 +5,30 @@
   <%= @vehicle.nickname %>
 </p>
 
+<p>
+  <strong>Mileage:</strong>
+  <%= @vehicle.mileage %>
+</p>
+
+<p>
+  <strong>Mileage Rating:</strong>
+  <%= @vehicle.mileage_rating %>
+</p>
+
+<p>
+  <strong>Wheels:</strong>
+  <%= @vehicle.wheels %>
+</p>
+
+<p>
+  <strong>Engine Status:</strong>
+  <%= @vehicle.engine_status %>
+</p>
+
+<p>
+  <strong>Registration ID:</strong>
+  <%= @vehicle.registration_id %>
+</p>
+
 <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
 <%= link_to 'Back', vehicles_path %>

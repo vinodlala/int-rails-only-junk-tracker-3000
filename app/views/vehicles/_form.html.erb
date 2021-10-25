@@ -11,7 +11,17 @@
     </div>
   <% end %>
 
+  <%= form.label :nickname %>
   <%= form.text_field :nickname %>
+
+  <%= form.label :mileage %>
+  <%= form.text_field :mileage %>
+
+  <%= form.label :wheels %>
+  <%= form.text_field :wheels %>
+
+  <%= form.label :engine_status %>
+  <%= form.select(:engine_status, @statuses) %>
 
   <div class="actions">
     <%= form.submit %>
