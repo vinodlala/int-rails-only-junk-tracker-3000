@@ -1,6 +1,7 @@
 class VehiclesController < ApplicationController
   before_action :set_vehicle, only: %i[ show edit update destroy ]
   before_action :set_statuses, only: %i[ show new edit create update ]
+  before_action :set_vehicle_types, only: %i[ show new edit create update ]
 
   # GET /vehicles or /vehicles.json
   def index
@@ -18,6 +19,7 @@ class VehiclesController < ApplicationController
 
   # GET /vehicles/1/edit
   def edit
+    @vehicle_type = @vehicle.vehicle_type
   end
 
   # POST /vehicles or /vehicles.json
@@ -26,8 +28,10 @@ class VehiclesController < ApplicationController
 
     @vehicle.registration_id = VehicleRegistrationService.register_vehicle @vehicle
 
+    @vehicle.vehicle_type = vehicle_type(params.require(:vehicle).permit(:vehicle_type))
+
     respond_to do |format|
-      if @vehicle.save
+      if @vehicle.save && @vehicle.vehicle_type.save
         format.html { redirect_to @vehicle, notice: "Vehicle was successfully created." }
         format.json { render :show, status: :created, location: @vehicle }
       else
@@ -39,8 +43,10 @@ class VehiclesController < ApplicationController
 
   # PATCH/PUT /vehicles/1 or /vehicles/1.json
   def update
+    @vehicle.vehicle_type = vehicle_type(params.require(:vehicle).permit(:vehicle_type))
+
     respond_to do |format|
-      if @vehicle.update(vehicle_params)
+      if @vehicle.update(vehicle_params) && @vehicle.vehicle_type.save
         format.html { redirect_to @vehicle, notice: "Vehicle was successfully updated." }
         format.json { render :show, status: :ok, location: @vehicle }
       else
@@ -76,5 +82,27 @@ class VehiclesController < ApplicationController
       [ "Fixable", "fixable" ],
       [ "Junk", "junk"],
     ]
+  end
+
+  def set_vehicle_types
+    @vehicle_types = [
+      [ "Coupe", "coupe" ],
+      [ "Sedan", "sedan" ],
+      [ "Mini-van", "mini_van" ],
+      [ "Motorcycle", "motorcycle" ],
+    ]
+  end
+
+  def vehicle_type(vehicle_type)
+    case vehicle_type["vehicle_type"]
+    when 'coupe'
+      Coupe.new(params.require(:vehicle).permit(:doors))
+    when 'sedan'
+      Sedan.new(params.require(:vehicle).permit(:doors))
+    when 'mini_van'
+      MiniVan.new(params.require(:vehicle).permit(:doors))
+    when 'motorcycle'
+      Motorcycle.new(params.require(:vehicle).permit(:seat_status))
+    end
   end
 end

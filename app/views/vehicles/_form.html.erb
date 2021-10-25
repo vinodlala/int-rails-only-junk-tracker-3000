@@ -23,6 +23,15 @@
   <%= form.label :engine_status %>
   <%= form.select(:engine_status, @statuses) %>
 
+  <%= form.label :vehicle_type %>
+  <%= form.select(:vehicle_type, @vehicle_types) %>
+
+  <%= form.label :doors %>
+  <%= form.text_field :doors %>
+
+  <%= form.label :seat_status %>
+  <%= form.select(:seat_status, @statuses) %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

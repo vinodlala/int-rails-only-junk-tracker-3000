@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Vehicle Type</th>
       <th>Nickname</th>
       <th>Mileage Rating</th>
       <th>Registration ID</th>
@@ -15,7 +16,7 @@
   <tbody>
     <% @vehicles.each do |vehicle| %>
       <tr>
-        <td><%= vehicle.nickname %></td>
+        <td><%= vehicle.vehicle_type.class %></td>
         <td><%= vehicle.mileage_rating %></td>
         <td><%= vehicle.registration_id %></td>
         <td><%= link_to 'Show', vehicle %></td>

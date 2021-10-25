@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_24_232735) do
+ActiveRecord::Schema.define(version: 2021_10_25_004339) do
 
   create_table "coupes", force: :cascade do |t|
     t.integer "doors"
@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(version: 2021_10_24_232735) do
     t.integer "mileage"
     t.integer "wheels"
     t.string "engine_status"
+    t.string "vehicle_type_type", null: false
+    t.integer "vehicle_type_id", null: false
+    t.index ["vehicle_type_type", "vehicle_type_id"], name: "index_vehicles_on_vehicle_type"
   end
 
 end

@@ -1,4 +1,6 @@
 class Vehicle < ApplicationRecord
+  belongs_to :vehicle_type, polymorphic: true
+
   validates :mileage, presence: true
 
   def mileage_rating
