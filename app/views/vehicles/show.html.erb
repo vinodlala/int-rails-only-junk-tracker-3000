@@ -1,9 +1,53 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Vehicle Type:</strong>
+  <%= @vehicle.vehicle_type.class %>
+</p>
+
+<p>
   <strong>Nickname:</strong>
   <%= @vehicle.nickname %>
 </p>
+
+<p>
+  <strong>Mileage:</strong>
+  <%= @vehicle.mileage %>
+</p>
+
+<p>
+  <strong>Mileage Rating:</strong>
+  <%= @vehicle.mileage_rating %>
+</p>
+
+<p>
+  <strong>Wheels:</strong>
+  <%= @vehicle.wheels %>
+</p>
+
+<p>
+  <strong>Engine Status:</strong>
+  <%= @vehicle.engine_status %>
+</p>
+
+<p>
+  <strong>Registration ID:</strong>
+  <%= @vehicle.registration_id %>
+</p>
+
+<% if @vehicle.vehicle_type.respond_to?(:doors) %>
+  <p>
+    <strong>Doors:</strong>
+    <%= @vehicle.vehicle_type.doors %>
+  </p>
+<% end %>
+
+<% if @vehicle.vehicle_type.respond_to?(:seat_status) %>
+  <p>
+    <strong>Seat Status:</strong>
+    <%= @vehicle.vehicle_type.seat_status %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
 <%= link_to 'Back', vehicles_path %>

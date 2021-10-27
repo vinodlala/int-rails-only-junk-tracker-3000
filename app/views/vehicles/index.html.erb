@@ -5,7 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th>Vehicle Type</th>
       <th>Nickname</th>
+      <th>Mileage Rating</th>
+      <th>Registration ID</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +16,10 @@
   <tbody>
     <% @vehicles.each do |vehicle| %>
       <tr>
+        <td><%= vehicle.vehicle_type.class %></td>
         <td><%= vehicle.nickname %></td>
+        <td><%= vehicle.mileage_rating %></td>
+        <td><%= vehicle.registration_id %></td>
         <td><%= link_to 'Show', vehicle %></td>
         <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
         <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
