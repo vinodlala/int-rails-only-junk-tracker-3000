@@ -15,7 +15,8 @@ class Vehicle < ApplicationRecord
   validates :engine_status, inclusion: { in: ENGINE_STATUSES }, allow_blank: true
 
   before_save do
-    self.engine_status = "works" if engine_status.blank?
+    set_engine_status
+    set_wheels
   end
 
   def motorcycle?
@@ -27,5 +28,19 @@ class Vehicle < ApplicationRecord
     return "low" if mileage < 10_000
     return "medium" if mileage < 100_000
     return "high"
+  end
+
+  def set_engine_status
+    self.engine_status = "works" if engine_status.blank?
+  end
+
+  def set_wheels
+    if wheels.blank?
+      if motorcycle?
+        self.wheels = 2
+      else
+        self.wheels = 4
+      end
+    end
   end
 end

@@ -1,5 +1,5 @@
 class Motorcycle < ApplicationRecord
-  has_one :base, class_name: 'Vehicle', as: :vehicle_type
+  include VehicleType
 
   SEAT_STATUSES = %w[
     works
