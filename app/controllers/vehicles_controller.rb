@@ -77,7 +77,7 @@ class VehiclesController < ApplicationController
 
   def set_statuses
     @statuses = [
-      [ "", "" ],
+      [ "", nil ],
       [ "Works", "works" ],
       [ "Fixable", "fixable" ],
       [ "Junk", "junk"],
