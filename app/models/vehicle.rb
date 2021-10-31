@@ -1,10 +1,22 @@
 class Vehicle < ApplicationRecord
   belongs_to :vehicle_type, polymorphic: true
 
+  ENGINE_STATUSES = %w[
+    works
+    fixable
+    junk
+  ]
+
   validates :mileage, presence: true
 
   validates :wheels, inclusion: { in: [ 0, 1, 2, 3, 4 ] }, allow_nil: true
   validates :wheels, inclusion: { in: [ 0, 1, 2 ] }, allow_nil: true, if: :motorcycle?
+
+  validates :engine_status, inclusion: { in: ENGINE_STATUSES }, allow_blank: true
+
+  before_save do
+    self.engine_status = "works" if engine_status.blank?
+  end
 
   def motorcycle?
     vehicle_type.class == Motorcycle
