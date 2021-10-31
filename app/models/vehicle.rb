@@ -7,12 +7,13 @@ class Vehicle < ApplicationRecord
     junk
   ]
 
+  validates :engine_status, inclusion: { in: ENGINE_STATUSES }, allow_blank: true
+
   validates :mileage, presence: true
 
   validates :wheels, inclusion: { in: [ 0, 1, 2, 3, 4 ] }, allow_nil: true
   validates :wheels, inclusion: { in: [ 0, 1, 2 ] }, allow_nil: true, if: :motorcycle?
 
-  validates :engine_status, inclusion: { in: ENGINE_STATUSES }, allow_blank: true
 
   before_save do
     set_engine_status
